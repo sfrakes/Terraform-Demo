@@ -1,3 +1,8 @@
+provider "azurerm" {
+  version = "=2.0.0"
+  features {}
+}
+
 variable "resource-group-name" {
   default     = "terraform-resource-group"
   description = "The prefix used for all resources in this example"
