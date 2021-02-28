@@ -41,8 +41,8 @@ resource "azurerm_sql_server" "terraform-sqlserver" {
   resource_group_name          = azurerm_resource_group.RG-Terraform.name
   location                     = azurerm_resource_group.RG-Terraform.location
   version                      = "12.0"
-  administrator_login          = "houssem"
-  administrator_login_password = "4-v3ry-53cr37-p455w0rd"
+  administrator_login          = "sfrakes"
+  administrator_login_password = "Password-123"
 }
 
 resource "azurerm_sql_database" "terraform-sqldatabase" {
