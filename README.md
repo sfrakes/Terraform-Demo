@@ -2,7 +2,7 @@
 Terraform-Demo
 
 
-#Watch out that app service name is unique.
+#Watch out that app service name is unique. stu
 
 Error: The name "terraform-app-service" used for the App Service 
 needs to be globally unique and isn't available: 
