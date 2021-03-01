@@ -42,7 +42,7 @@ resource "azurerm_app_service" "AS-Terraform" {
 }
 
 resource "azurerm_sql_server" "test" {
-  name                         = "terraform-sqlserver"
+  name                         = "rs-terraform-sqlserver"
   resource_group_name          = azurerm_resource_group.RG-Terraform.name
   location                     = azurerm_resource_group.RG-Terraform.location
   version                      = "12.0"
@@ -51,7 +51,7 @@ resource "azurerm_sql_server" "test" {
 }
 
 resource "azurerm_sql_database" "test" {
-  name                = "terraform-sqldatabase"
+  name                = "rs-terraform-sqldatabase"
   resource_group_name = azurerm_resource_group.RG-Terraform.name
   location            = azurerm_resource_group.RG-Terraform.location
   server_name         = azurerm_sql_server.test.name
