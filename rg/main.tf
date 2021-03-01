@@ -1,12 +1,30 @@
-# Configure the Microsoft Azure Provider
+## <https://www.terraform.io/docs/providers/azurerm/index.html>
 provider "azurerm" {
-  version = "=2.0.0"
+  version = "=2.5.0"
   features {}
 }
 
-resource "azurerm_resource_group" "RG-Terraform" {
-  name     = "MPN-resource-group"
+## <https://www.terraform.io/docs/providers/azurerm/r/resource_group.html>
+resource "azurerm_resource_group" "rg" {
+  name     = "TerraformTesting"
   location = "uksouth"
+}
+
+
+## <https://www.terraform.io/docs/providers/azurerm/r/virtual_network.html>
+resource "azurerm_virtual_network" "vnet" {
+  name                = "vNet"
+  address_space       = ["10.250.0.0/16"]
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+## <https://www.terraform.io/docs/providers/azurerm/r/subnet.html> 
+resource "azurerm_subnet" "subnet" {
+  name                 = "internal"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefix       = "10.250.2.0/24"
 }
 
 ## <https://www.terraform.io/docs/providers/azurerm/r/network_interface.html>
@@ -30,6 +48,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   size                = "Standard_F2"
   admin_username      = "adminuser"
   admin_password      = "P@$$w0rd1234!"
+  availability_set_id = azurerm_availability_set.DemoAset.id
   network_interface_ids = [
     azurerm_network_interface.example.id,
   ]
