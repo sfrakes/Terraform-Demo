@@ -71,7 +71,7 @@ network_security_group_id = azurerm_network_security_group.example_nsg.id
 }
 # Virtual Machine Creation — Linux
 
-resource "azurerm_windows_virtual_machine" "example" {
+resource "azurerm_windows_virtual_machine" "example_vm" {
 count = var.node_count
 name = "${var.resource_prefix}-${format("%02d", count.index)}"
 #name = "${var.resource_prefix}-VM"
@@ -81,6 +81,7 @@ network_interface_ids = [element(azurerm_network_interface.example_nic.*.id, cou
 size = "Standard_D1_v2"
 admin_username = "rsadmin"
 admin_password = "C0lumbiana12"
+
 storage_image_reference {
 publisher = "MicrosoftWindowsServer"
 offer = "WindowsServer"
