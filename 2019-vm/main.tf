@@ -79,27 +79,16 @@ location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
 network_interface_ids = [element(azurerm_network_interface.example_nic.*.id, count.index)]
 size = "Standard_D1_v2"
+admin_username = "rsadmin"
+admin_password = "C0lumbiana12"
 storage_image_reference {
 publisher = "MicrosoftWindowsServer"
 offer = "WindowsServer"
 sku = "2016-Datacenter"
 version = "latest"
 }
-storage_os_disk {
+os_disk {
 name = "myosdisk-${count.index}"
 caching = "ReadWrite"
-create_option = "FromImage"
 managed_disk_type = "Standard_LRS"
-}
-os_profile {
-computer_name = "rsapp"
-admin_username = "rsadmin"
-admin_password = "C0lumbiana12"
-}
-os_profile_linux_config {
-disable_password_authentication = false
-}
-tags = {
-environment = "Test"
-}
 }
