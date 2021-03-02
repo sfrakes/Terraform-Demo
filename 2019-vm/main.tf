@@ -38,7 +38,7 @@ ip_configuration {
 name = "internal"
 subnet_id = azurerm_subnet.example_subnet.id
 private_ip_address_allocation = "Dynamic"
-public_ip_address_id = element(azurerm_public_ip.example_public_ip.*.id, count.index)
+#public_ip_address_id = element(azurerm_public_ip.example_public_ip.*.id, count.index)
 #public_ip_address_id = azurerm_public_ip.example_public_ip.id
 #public_ip_address_id = azurerm_public_ip.example_public_ip.id
 }
