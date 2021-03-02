@@ -70,7 +70,7 @@ subnet_id = azurerm_subnet.example_subnet.id
 network_security_group_id = azurerm_network_security_group.example_nsg.id
 }
 # Virtual Machine Creation — Linux
-###resource "azurerm_virtual_machine" "example_windows_vm" {
+
 resource "azurerm_windows_virtual_machine" "example" {
 count = var.node_count
 name = "${var.resource_prefix}-${format("%02d", count.index)}"
@@ -78,8 +78,7 @@ name = "${var.resource_prefix}-${format("%02d", count.index)}"
 location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
 network_interface_ids = [element(azurerm_network_interface.example_nic.*.id, count.index)]
-vm_size = "Standard_D1_v2"
-delete_os_disk_on_termination = true
+size = "Standard_D1_v2"
 storage_image_reference {
 publisher = "MicrosoftWindowsServer"
 offer = "WindowsServer"
