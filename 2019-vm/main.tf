@@ -26,7 +26,6 @@ virtual_network_name = azurerm_virtual_network.example_vnet.name
 address_prefix = var.node_address_prefix
 }
 
-}
 # Create Network Interface
 resource "azurerm_network_interface" "example_nic" {
 count = var.node_count
