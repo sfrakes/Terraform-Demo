@@ -26,17 +26,6 @@ virtual_network_name = azurerm_virtual_network.example_vnet.name
 address_prefix = var.node_address_prefix
 }
 
-# Create Linux Public IP
-resource "azurerm_public_ip" "example_public_ip" {
-count = var.node_count
-name = "${var.resource_prefix}-${format("%02d", count.index)}-PublicIP"
-#name = "${var.resource_prefix}-PublicIP"
-location = azurerm_resource_group.example_rg.location
-resource_group_name = azurerm_resource_group.example_rg.name
-allocation_method = var.Environment == "Test" ? "Static" : "Dynamic"
-tags = {
-environment = "Test"
-}
 }
 # Create Network Interface
 resource "azurerm_network_interface" "example_nic" {
@@ -82,7 +71,8 @@ subnet_id = azurerm_subnet.example_subnet.id
 network_security_group_id = azurerm_network_security_group.example_nsg.id
 }
 # Virtual Machine Creation — Linux
-resource "azurerm_virtual_machine" "example_windows_vm" {
+###resource "azurerm_virtual_machine" "example_windows_vm" {
+resource "azurerm_windows_virtual_machine" "example" {
 count = var.node_count
 name = "${var.resource_prefix}-${format("%02d", count.index)}"
 #name = "${var.resource_prefix}-VM"
