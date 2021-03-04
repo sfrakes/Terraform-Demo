@@ -87,9 +87,11 @@ offer = "WindowsServer"
 sku = "2016-Datacenter"
 version = "latest"
 }
+
 os_disk {
 name = "myosdisk-${count.index}"
 caching = "ReadWrite"
 managed_disk_type = "Standard_LRS"
 }
+
 }
