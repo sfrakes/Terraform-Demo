@@ -30,7 +30,7 @@ address_prefix = var.node_address_prefix
 resource "azurerm_network_interface" "example_nic" {
 count = var.node_count
 #name = "${var.resource_prefix}-NIC"
-name = "${var.resource_prefix}-${format("%02d", count.index)}-NIC"
+name = "${var.resource_prefix}-${format("%02d", count.index + 1)}-NIC"
 location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
 #
@@ -38,7 +38,7 @@ ip_configuration {
 name = "internal"
 subnet_id = azurerm_subnet.example_subnet.id
 private_ip_address_allocation = "Dynamic"
-#public_ip_address_id = element(azurerm_public_ip.example_public_ip.*.id, count.index)
+#public_ip_address_id = element(azurerm_public_ip.example_public_ip.*.id, count.index + 1)
 #public_ip_address_id = azurerm_public_ip.example_public_ip.id
 #public_ip_address_id = azurerm_public_ip.example_public_ip.id
 }
@@ -73,10 +73,10 @@ network_security_group_id = azurerm_network_security_group.example_nsg.id
 
 resource "azurerm_windows_virtual_machine" "example_vm" {
 count = var.node_count
-name = "${var.resource_prefix}-${format("%02d", count.index)}"
+name = "${var.resource_prefix}-${format("%02d", count.index + 1)}"
 location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
-network_interface_ids = [element(azurerm_network_interface.example_nic.*.id, count.index)]
+network_interface_ids = [element(azurerm_network_interface.example_nic.*.id, count.index + 1)]
 size = "Standard_D1_v2"
 admin_username = "rsadmin"
 admin_password = "C0lumbiana12"
@@ -89,8 +89,8 @@ version = "latest"
 }
 
 os_disk {
-#name = "myosdisk-${count.index}"
-name = "${var.resource_prefix}-${format("%02d", count.index)}"
+#name = "myosdisk-${count.index + 1}"
+name = "${var.resource_prefix}-${format("%02d", count.index + 1)}"
 caching = "ReadWrite"
 storage_account_type = "Standard_LRS"
 }
