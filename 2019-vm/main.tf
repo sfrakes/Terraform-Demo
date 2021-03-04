@@ -81,7 +81,7 @@ size = "Standard_D1_v2"
 admin_username = "rsadmin"
 admin_password = "C0lumbiana12"
 
-storage_image_reference {
+source_image_reference {
 publisher = "MicrosoftWindowsServer"
 offer = "WindowsServer"
 sku = "2016-Datacenter"
