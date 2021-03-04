@@ -6,7 +6,7 @@ provider "azurerm" {
 
 # Create a resource group
 resource "azurerm_resource_group" "example_rg" {
-name = "${var.resource_prefix}-RG"
+name = "${var.resource_prefix}-rg"
 location = var.node_location
 }
 
@@ -29,7 +29,7 @@ address_prefix = var.node_address_prefix
 # Create Network Interface
 resource "azurerm_network_interface" "example_nic" {
 count = var.node_count
-#name = "${var.resource_prefix}-NIC"
+#name = "${var.resource_prefix}-nic"
 name = "${var.resource_prefix}${format("%02d", count.index + 1)}-NIC"
 location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
@@ -45,7 +45,7 @@ private_ip_address_allocation = "Dynamic"
 }
 # Creating resource NSG
 resource "azurerm_network_security_group" "example_nsg" {
-name = "${var.resource_prefix}-NSG"
+name = "${var.resource_prefix}-nsg"
 location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
 # Security rule can also be defined with resource azurerm_network_security_rule, here just defining it inline.
@@ -89,7 +89,6 @@ version = "latest"
 }
 
 os_disk {
-#name = "myosdisk-${count.index + 1}"
 name = "${var.resource_prefix}_osdisk${format("%02d", count.index + 1)}"
 caching = "ReadWrite"
 storage_account_type = "Standard_LRS"
