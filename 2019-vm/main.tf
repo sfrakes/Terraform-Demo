@@ -29,8 +29,7 @@ address_prefix = var.node_address_prefix
 # Create Network Interface
 resource "azurerm_network_interface" "example_nic" {
 count = var.node_count
-#name = "${var.resource_prefix}-nic"
-name = "${var.resource_prefix}${format("%02d", count.index + 1)}-NIC"
+name = "${var.resource_prefix}${format("%02d", count.index + 1)}-nic"
 location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
 #
@@ -38,11 +37,9 @@ ip_configuration {
 name = "internal"
 subnet_id = azurerm_subnet.example_subnet.id
 private_ip_address_allocation = "Dynamic"
-#public_ip_address_id = element(azurerm_public_ip.example_public_ip.*.id, count.index + 1)
-#public_ip_address_id = azurerm_public_ip.example_public_ip.id
-#public_ip_address_id = azurerm_public_ip.example_public_ip.id
 }
 }
+
 # Creating resource NSG
 resource "azurerm_network_security_group" "example_nsg" {
 name = "${var.resource_prefix}-nsg"
