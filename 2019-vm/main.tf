@@ -69,7 +69,7 @@ resource "azurerm_subnet_network_security_group_association" "example_subnet_nsg
 subnet_id = azurerm_subnet.example_subnet.id
 network_security_group_id = azurerm_network_security_group.example_nsg.id
 }
-# Virtual Machine Creation — Linux
+# Virtual Machine Creation — Windows
 
 resource "azurerm_windows_virtual_machine" "example_vm" {
 count = var.node_count
@@ -89,7 +89,8 @@ version = "latest"
 }
 
 os_disk {
-name = "myosdisk-${count.index}"
+#name = "myosdisk-${count.index}"
+name = "${var.resource_prefix}-${format("%02d", count.index)}"
 caching = "ReadWrite"
 storage_account_type = "Standard_LRS"
 }
