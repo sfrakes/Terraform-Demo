@@ -86,7 +86,8 @@ version = "latest"
 }
 
 os_disk {
-name = "${var.resource_prefix}_osdisk${format("%02d", count.index + 1)}"
+#name = "${var.resource_prefix}_osdisk${format("%02d", count.index + 1)}"
+name = "${var.resource_prefix}${format("%02d", count.index + 1)}"
 caching = "ReadWrite"
 storage_account_type = "Standard_LRS"
 }
