@@ -66,8 +66,9 @@ resource "azurerm_subnet_network_security_group_association" "example_subnet_nsg
 subnet_id = azurerm_subnet.example_subnet.id
 network_security_group_id = azurerm_network_security_group.example_nsg.id
 }
-# Virtual Machine Creation — Windows
 
+
+# Virtual Machine Creation — Windows
 resource "azurerm_windows_virtual_machine" "example_vm" {
 count = var.node_count
 name = "${var.resource_prefix}${format("%02d", count.index + 1)}"
@@ -77,14 +78,12 @@ network_interface_ids = [element(azurerm_network_interface.example_nic.*.id, cou
 size = "Standard_D1_v2"
 admin_username = "rsadmin"
 admin_password = "C0lumbiana12"
-
 source_image_reference {
 publisher = "MicrosoftWindowsServer"
 offer = "WindowsServer"
 sku = "2016-Datacenter"
 version = "latest"
 }
-
 os_disk {
 #name = "${var.resource_prefix}_osdisk${format("%02d", count.index + 1)}"
 #name = "${var.resource_prefix}${format("%02d", count.index + 1)}"
