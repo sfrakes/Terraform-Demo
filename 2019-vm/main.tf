@@ -30,7 +30,7 @@ address_prefix = var.node_address_prefix
 resource "azurerm_network_interface" "example_nic" {
 count = var.node_count
 #name = "${var.resource_prefix}-NIC"
-name = "${var.resource_prefix}-${format("%02d", count.index + 1)}-NIC"
+name = "${var.resource_prefix}${format("%02d", count.index + 1)}-NIC"
 location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
 #
@@ -73,7 +73,7 @@ network_security_group_id = azurerm_network_security_group.example_nsg.id
 
 resource "azurerm_windows_virtual_machine" "example_vm" {
 count = var.node_count
-name = "${var.resource_prefix}-${format("%02d", count.index + 1)}"
+name = "${var.resource_prefix}${format("%02d", count.index + 1)}"
 location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
 network_interface_ids = [element(azurerm_network_interface.example_nic.*.id, count.index + 1)]
@@ -90,9 +90,18 @@ version = "latest"
 
 os_disk {
 #name = "myosdisk-${count.index + 1}"
-name = "${var.resource_prefix}-${format("%02d", count.index + 1)}"
+name = "${var.resource_prefix}${format("%02d", count.index + 1)}"
 caching = "ReadWrite"
 storage_account_type = "Standard_LRS"
 }
 
 }
+
+
+
+
+
+
+
+
+
