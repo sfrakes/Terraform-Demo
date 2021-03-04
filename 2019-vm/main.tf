@@ -74,7 +74,6 @@ network_security_group_id = azurerm_network_security_group.example_nsg.id
 resource "azurerm_windows_virtual_machine" "example_vm" {
 count = var.node_count
 name = "${var.resource_prefix}-${format("%02d", count.index)}"
-#name = "${var.resource_prefix}-VM"
 location = azurerm_resource_group.example_rg.location
 resource_group_name = azurerm_resource_group.example_rg.name
 network_interface_ids = [element(azurerm_network_interface.example_nic.*.id, count.index)]
@@ -92,4 +91,5 @@ os_disk {
 name = "myosdisk-${count.index}"
 caching = "ReadWrite"
 managed_disk_type = "Standard_LRS"
+}
 }
