@@ -1,9 +1,3 @@
-## <https://www.terraform.io/docs/providers/azurerm/index.html>
-provider "azurerm" {
-  version = "=2.5.0"
-  features {}
-}
-
 # Create a resource group
 resource "azurerm_resource_group" "example_rg" {
 name = "${var.resource_prefix}-rg"
